@@ -3,6 +3,7 @@ pipeline {
     agent { node { label 'master' } }
 
     stages {
+        try {
         stage("Checkout") {
             steps {
                 git(url: 'file:///Users/munene/git/AccountApp/.git', branch: 'developer', poll: true)
@@ -45,6 +46,12 @@ pipeline {
                 echo "Deploying...."
             }
   		}
+    }
+    catch (err) {
+        echo "Caught: ${err}" 
+        currentBuild . result = 'FAILURE' 
+
+    }
 
     }
 
