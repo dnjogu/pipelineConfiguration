@@ -6,8 +6,7 @@ pipeline {
 
     parameters {
     	string(defaultValue: '', description: '', name: 'BRANCH_NAME' ) 
-    	choice (
-    		choices: 'DEBUG\nRELEASE\nTEST' 
+    	choice (choices: 'DEBUG\nRELEASE\nTEST') 
       	}
 
       	stages {
@@ -15,10 +14,8 @@ pipeline {
       	 { 
       	 	when 
       	 		{ allOf 
-      	 			{ expression 
-      	 				{ params . BRANCH_NAME == "master" } 
-      	 					expression 
-      	 						{ params . BUILD_TYPE == 'RELEASE' } 
+      	 			{ expression { params . BRANCH_NAME == "master" } 
+      	 			  expression { params . BUILD_TYPE == 'RELEASE' } 
       	 						} 
   	 						} 
   	 						steps 
