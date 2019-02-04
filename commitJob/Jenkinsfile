@@ -6,7 +6,7 @@ pipeline {
         try {
         stage("Checkout") {
             steps {
-                git(url: 'file:///Users/munene/git/AccountApp/.git', branch: 'developer', poll: true)
+                git(url: 'https://github.com/dnjogu/pipelineConfiguration.git', branch: 'developer', poll: true)
             }
         }
 
@@ -56,8 +56,9 @@ pipeline {
     }
         post { 
             always 
-            { mail to: 'davidmnjogu@gmail.com' subject: "Status of pipeline: ${currentBuild.fullDisplayName}" , 
-                body: "${env.BUILD_URL} has result ${currentBuild.result}" } 
+            { mail to: 'youremail@gmail.com', 
+            subject: "Status of pipeline: ${currentBuild.fullDisplayName}" , 
+            body: "${env.BUILD_URL} has result ${currentBuild.result}" } 
             }
         }
 
